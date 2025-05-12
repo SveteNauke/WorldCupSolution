@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="bin\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Data\men\group_results.json" />
     <None Remove="Data\men\matches.json" />
     <None Remove="Data\men\results.json" />
@@ -20,22 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\net8.0-windows\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
-    <Compile Include="obj\Debug\net8.0-windows\WorldCupWinForms.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net8.0-windows\WorldCupWinForms.GlobalUsings.g.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bin\Debug\net8.0-windows\Data\men\group_results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\matches.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\teams.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\group_results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\matches.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\teams.json" />
-    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.deps.json" />
-    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.runtimeconfig.json" />
     <Content Include="Data\men\group_results.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -60,38 +53,6 @@
     <Content Include="Data\women\teams.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="obj\Debug\net8.0-windows\WorldCupWinForms.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\net8.0-windows\WorldCupWinForms.designer.deps.json" />
-    <Content Include="obj\Debug\net8.0-windows\WorldCupWinForms.designer.runtimeconfig.json" />
-    <Content Include="obj\project.assets.json" />
-    <Content Include="obj\WorldCupWinForms.csproj.nuget.dgspec.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\net8.0-windows\Newtonsoft.Json.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupData.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupData.pdb" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.exe" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.pdb" />
-    <None Include="obj\Debug\net8.0-windows\apphost.exe" />
-    <None Include="obj\Debug\net8.0-windows\refint\WorldCupWinForms.dll" />
-    <None Include="obj\Debug\net8.0-windows\ref\WorldCupWinForms.dll" />
-    <None Include="obj\Debug\net8.0-windows\WorldCup.3C98B67B.Up2Date" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.assets.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.csproj.BuildWithSkipAnalyzers" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.csproj.GenerateResource.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.dll" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.genruntimeconfig.cache" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.MainForm.resources" />
-    <None Include="obj\Debug\net8.0-windows\WorldCupWinForms.pdb" />
-    <None Include="obj\project.nuget.cache" />
-    <None Include="obj\WorldCupWinForms.csproj.nuget.g.props" />
-    <None Include="obj\WorldCupWinForms.csproj.nuget.g.targets" />
   </ItemGroup>
 
   <ItemGroup>
