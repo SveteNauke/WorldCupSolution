@@ -14,7 +14,7 @@ namespace WorldCupWinForms
         private async void MainForm_Load(object sender, EventArgs e)
         {
             IDataProvider provider = new JsonDataProvider(); // or ApiDataProvider
-            var matches = await provider.GetMatchesAsync(TournamentType.Women);
+            var matches = await provider.GetMatchesAsync(TournamentType.Men);
             MessageBox.Show($"U?itanih utakmica: {matches.Count}");
         }
     }

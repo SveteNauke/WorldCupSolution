@@ -1,3 +1,5 @@
+using WorldCupData.Config;
+
 namespace WorldCupWinForms
 {
     internal static class Program
@@ -10,7 +12,10 @@ namespace WorldCupWinForms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+
+
             ApplicationConfiguration.Initialize();
+
             Application.Run(new MainForm());
         }
     }
