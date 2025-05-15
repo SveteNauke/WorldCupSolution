@@ -31,6 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
             btnOpenSettings = new ToolStripButton();
+            cmbFavoriteTeam = new ComboBox();
+            lblFavoriteTeam = new Label();
+            pnlAllPlayers = new FlowLayoutPanel();
+            pnlFavoritePlayers = new FlowLayoutPanel();
+            lblAllPlayers = new Label();
+            lblFavoritePlayers = new Label();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,11 +61,71 @@
             btnOpenSettings.Text = "Settings";
             btnOpenSettings.Click += btnOpenSettings_Click;
             // 
+            // cmbFavoriteTeam
+            // 
+            cmbFavoriteTeam.FormattingEnabled = true;
+            cmbFavoriteTeam.Location = new Point(203, 55);
+            cmbFavoriteTeam.Name = "cmbFavoriteTeam";
+            cmbFavoriteTeam.Size = new Size(179, 23);
+            cmbFavoriteTeam.TabIndex = 1;
+            cmbFavoriteTeam.SelectedIndexChanged += cmbFavoriteTeam_SelectedIndexChanged;
+            // 
+            // lblFavoriteTeam
+            // 
+            lblFavoriteTeam.AutoSize = true;
+            lblFavoriteTeam.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblFavoriteTeam.Location = new Point(42, 48);
+            lblFavoriteTeam.Name = "lblFavoriteTeam";
+            lblFavoriteTeam.RightToLeft = RightToLeft.No;
+            lblFavoriteTeam.Size = new Size(143, 30);
+            lblFavoriteTeam.TabIndex = 2;
+            lblFavoriteTeam.Text = "Favorite team:";
+            // 
+            // pnlAllPlayers
+            // 
+            pnlAllPlayers.Location = new Point(42, 137);
+            pnlAllPlayers.Name = "pnlAllPlayers";
+            pnlAllPlayers.Size = new Size(350, 377);
+            pnlAllPlayers.TabIndex = 3;
+            // 
+            // pnlFavoritePlayers
+            // 
+            pnlFavoritePlayers.Location = new Point(414, 137);
+            pnlFavoritePlayers.Name = "pnlFavoritePlayers";
+            pnlFavoritePlayers.Size = new Size(350, 377);
+            pnlFavoritePlayers.TabIndex = 4;
+            // 
+            // lblAllPlayers
+            // 
+            lblAllPlayers.AutoSize = true;
+            lblAllPlayers.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAllPlayers.Location = new Point(54, 113);
+            lblAllPlayers.Name = "lblAllPlayers";
+            lblAllPlayers.Size = new Size(82, 21);
+            lblAllPlayers.TabIndex = 0;
+            lblAllPlayers.Text = "All players";
+            // 
+            // lblFavoritePlayers
+            // 
+            lblFavoritePlayers.AutoSize = true;
+            lblFavoritePlayers.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblFavoritePlayers.Location = new Point(414, 113);
+            lblFavoritePlayers.Name = "lblFavoritePlayers";
+            lblFavoritePlayers.Size = new Size(119, 21);
+            lblFavoritePlayers.TabIndex = 5;
+            lblFavoritePlayers.Text = "Favorite Players";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 537);
+            Controls.Add(lblFavoritePlayers);
+            Controls.Add(lblAllPlayers);
+            Controls.Add(pnlFavoritePlayers);
+            Controls.Add(pnlAllPlayers);
+            Controls.Add(lblFavoriteTeam);
+            Controls.Add(cmbFavoriteTeam);
             Controls.Add(toolStrip1);
             Name = "MainForm";
             Text = "Form1";
@@ -74,5 +140,11 @@
 
         private ToolStrip toolStrip1;
         private ToolStripButton btnOpenSettings;
+        private ComboBox cmbFavoriteTeam;
+        private Label lblFavoriteTeam;
+        private FlowLayoutPanel pnlAllPlayers;
+        private FlowLayoutPanel pnlFavoritePlayers;
+        private Label lblAllPlayers;
+        private Label lblFavoritePlayers;
     }
 }

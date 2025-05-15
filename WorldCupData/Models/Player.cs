@@ -10,13 +10,13 @@ namespace WorldCupData.Models
     public class Player
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonProperty("captain")]
         public bool Captain { get; set; }
 
         [JsonProperty("shirt_number")]
-        public int ShirtNumber { get; set; }
+        public int? ShirtNumber { get; set; }
 
         [JsonProperty("position")]
         public string Position { get; set; }
