@@ -28,19 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            toolStrip1 = new ToolStrip();
+            btnOpenSettings = new ToolStripButton();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnOpenSettings });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(800, 25);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // btnOpenSettings
+            // 
+            btnOpenSettings.Alignment = ToolStripItemAlignment.Right;
+            btnOpenSettings.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnOpenSettings.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOpenSettings.Image = (Image)resources.GetObject("btnOpenSettings.Image");
+            btnOpenSettings.ImageTransparentColor = Color.Magenta;
+            btnOpenSettings.Name = "btnOpenSettings";
+            btnOpenSettings.Size = new Size(23, 22);
+            btnOpenSettings.Text = "Settings";
+            btnOpenSettings.Click += btnOpenSettings_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(toolStrip1);
             Name = "MainForm";
             Text = "Form1";
             Load += MainForm_Load;
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private ToolStrip toolStrip1;
+        private ToolStripButton btnOpenSettings;
     }
 }

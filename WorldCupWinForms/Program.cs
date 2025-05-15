@@ -1,4 +1,4 @@
-using WorldCupData.Config;
+﻿using WorldCupData.Config;
 
 namespace WorldCupWinForms
 {
@@ -16,7 +16,18 @@ namespace WorldCupWinForms
 
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new MainForm());
+            var config = AppConfig.Load();
+
+            if (config == null)
+            {
+                var settingsForm = new SettingsForm();
+                if (settingsForm.ShowDialog() != DialogResult.OK)
+                    return;
+
+                config = AppConfig.Load();
+            }
+
+            Application.Run(new MainForm(config));
         }
     }
 }
