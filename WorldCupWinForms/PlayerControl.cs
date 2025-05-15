@@ -11,10 +11,11 @@ using WorldCupData.Models;
 
 namespace WorldCupWinForms
 {
-    public partial class PlayerControl : UserControl
+    public partial class PlayerControl: UserControl
     {
         public Player Player { get; private set; }
         public bool IsFavorite { get; private set; }
+        public bool IsSelected { get; private set; }
 
         public string PlayerId => $"{Player.Name}-{Player.ShirtNumber}";
 
@@ -53,12 +54,22 @@ namespace WorldCupWinForms
             this.BorderStyle = BorderStyle.FixedSingle;
             this.Margin = new Padding(5);
             this.Padding = new Padding(5);
+
+            this.MouseDown += PlayerControl_MouseDown;
+            lblName.MouseDown += PlayerControl_MouseDown;
+            lblDetails.MouseDown += PlayerControl_MouseDown;
+
+        }
+
+        private void PlayerControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.DoDragDrop(this, DragDropEffects.Move);
         }
 
         public void SetFavorite(bool isFavorite)
         {
             IsFavorite = isFavorite;
-            this.BackColor = isFavorite ? Color.Gold : SystemColors.Control;
+            this.BackColor = isFavorite ? Color.Pink : SystemColors.Control;
         }
 
     }

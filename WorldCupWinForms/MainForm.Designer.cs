@@ -83,10 +83,13 @@
             // 
             // pnlAllPlayers
             // 
+            pnlAllPlayers.AutoScroll = true;
+            pnlAllPlayers.FlowDirection = FlowDirection.TopDown;
             pnlAllPlayers.Location = new Point(42, 137);
             pnlAllPlayers.Name = "pnlAllPlayers";
             pnlAllPlayers.Size = new Size(350, 377);
             pnlAllPlayers.TabIndex = 3;
+            pnlAllPlayers.WrapContents = false;
             // 
             // pnlFavoritePlayers
             // 
@@ -119,7 +122,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 537);
+            ClientSize = new Size(800, 554);
             Controls.Add(lblFavoritePlayers);
             Controls.Add(lblAllPlayers);
             Controls.Add(pnlFavoritePlayers);

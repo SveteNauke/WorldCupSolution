@@ -12,6 +12,7 @@ namespace WorldCupWinForms
         private readonly string favoriteTeamFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "favorite_team.txt");
         private readonly string favoritePlayersFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "favorite_players.txt");
 
+
         public MainForm(AppConfig config)
         {
             InitializeComponent();
@@ -27,8 +28,20 @@ namespace WorldCupWinForms
 
             MessageBox.Show($"Jezik: {_config.Language}, Prvenstvo: {_config.Tournament}");
 
+            pnlAllPlayers.AllowDrop = true;
+            pnlFavoritePlayers.AllowDrop = true;
+
+            pnlAllPlayers.DragEnter += Flp_DragEnter;
+            pnlFavoritePlayers.DragEnter += Flp_DragEnter;
+
+            pnlAllPlayers.DragDrop += FlpAllPlayers_DragDrop;
+            pnlFavoritePlayers.DragDrop += FlpFavoritePlayers_DragDrop;
+
+
             await LoadTeamsAsync();
             await HandleFavoriteTeamChangedAsync();
+            await LoadPlayersForFavoriteTeamAsync();
+
 
         }
 
@@ -62,7 +75,7 @@ namespace WorldCupWinForms
 
         private void cmbFavoriteTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _ = HandleFavoriteTeamChangedAsync(); // Fire-and-forget
+            _ = HandleFavoriteTeamChangedAsync(); 
         }
 
         private async Task HandleFavoriteTeamChangedAsync()
@@ -90,22 +103,16 @@ namespace WorldCupWinForms
             var teamStats = match.HomeTeam.Code == fifaCode ? match.HomeTeamStatistics : match.AwayTeamStatistics;
 
             var allPlayers = teamStats.StartingEleven.Concat(teamStats.Substitutes).ToList();
-
-            // Prikaz igrača u panel
             pnlAllPlayers.Controls.Clear();
 
             foreach (var player in allPlayers)
             {
-                var label = new Label
-                {
-                    AutoSize = true,
-                    Padding = new Padding(3),
-                    Margin = new Padding(5),
-                    Font = new Font("Segoe UI", 9),
-                    Text = $"{player.ShirtNumber} - {player.Name} ({player.Position})" + (player.Captain ? " ★" : "")
-                };
-                pnlAllPlayers.Controls.Add(label);
+                var ctrl = new PlayerControl(player);
+                ctrl.SetFavorite(false); // jer dolazi iz allPlayers
+
+                pnlAllPlayers.Controls.Add(ctrl);
             }
+
         }
 
 
@@ -115,6 +122,103 @@ namespace WorldCupWinForms
             var start = selection.LastIndexOf('(') + 1;
             var length = selection.LastIndexOf(')') - start;
             return selection.Substring(start, length);
+        }
+
+        private void Flp_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(PlayerControl)))
+                e.Effect = DragDropEffects.Move;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void FlpAllPlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetData(typeof(PlayerControl)) is PlayerControl ctrl)
+            {
+                ctrl.SetFavorite(false);
+                pnlFavoritePlayers.Controls.Remove(ctrl);
+                pnlAllPlayers.Controls.Add(ctrl);
+                SaveFavoritePlayersToFile();
+            }
+        }
+
+        private void FlpFavoritePlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetData(typeof(PlayerControl)) is PlayerControl ctrl)
+            {
+                if (pnlFavoritePlayers.Controls.Count >= 3)
+                {
+                    MessageBox.Show("Možeš označiti najviše 3 omiljena igrača.", "Ograničenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                ctrl.SetFavorite(true);
+                pnlAllPlayers.Controls.Remove(ctrl);
+                pnlFavoritePlayers.Controls.Add(ctrl);
+                SaveFavoritePlayersToFile();
+            }
+        }
+
+        private void SaveFavoritePlayersToFile()
+        {
+            var ids = pnlFavoritePlayers.Controls
+                .OfType<PlayerControl>()
+                .Select(p => p.PlayerId)
+                .ToList();
+
+            File.WriteAllLines(favoritePlayersFile, ids);
+        }
+
+        private async Task LoadPlayersForFavoriteTeamAsync()
+        {
+            if (!File.Exists(favoriteTeamFilePath)) return;
+
+            var favoriteTeam = File.ReadAllText(favoriteTeamFilePath);
+            var fifaCode = GetFifaCodeFromSelection(favoriteTeam);
+
+            IDataProvider provider = new JsonDataProvider(); // ili ApiDataProvider
+            var matches = await provider.GetMatchesAsync(_config.Tournament);
+
+            // Prva utakmica gdje se pojavljuje omiljeni tim
+            var match = matches.FirstOrDefault(m =>
+                m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode);
+
+            if (match == null)
+            {
+                MessageBox.Show("Nema utakmica za odabranu reprezentaciju.");
+                return;
+            }
+
+            var teamStats = match.HomeTeam.Code == fifaCode
+                ? match.HomeTeamStatistics
+                : match.AwayTeamStatistics;
+
+            var players = teamStats.StartingEleven.Concat(teamStats.Substitutes).ToList();
+
+            // Učitaj omiljene iz .txt datoteke
+            var favoriteIds = File.Exists(favoritePlayersFile)
+                ? File.ReadAllLines(favoritePlayersFile).ToHashSet()
+                : new HashSet<string>();
+
+            // Očisti panele
+            pnlAllPlayers.Controls.Clear();
+            pnlFavoritePlayers.Controls.Clear();
+
+            foreach (var player in players)
+            {
+                var ctrl = new PlayerControl(player); // nova instanca kontrole
+
+                if (favoriteIds.Contains(ctrl.PlayerId))
+                {
+                    ctrl.SetFavorite(true);
+                    pnlFavoritePlayers.Controls.Add(ctrl);
+                }
+                else
+                {
+                    pnlAllPlayers.Controls.Add(ctrl);
+                }
+            }
         }
 
     }
