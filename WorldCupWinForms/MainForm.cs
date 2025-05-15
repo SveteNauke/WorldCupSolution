@@ -107,7 +107,7 @@ namespace WorldCupWinForms
 
             foreach (var player in allPlayers)
             {
-                var ctrl = new PlayerControl(player);
+                var ctrl = new PlayerControl(player, fifaCode);
                 ctrl.SetFavorite(false); // jer dolazi iz allPlayers
 
                 pnlAllPlayers.Controls.Add(ctrl);
@@ -207,7 +207,7 @@ namespace WorldCupWinForms
 
             foreach (var player in players)
             {
-                var ctrl = new PlayerControl(player); // nova instanca kontrole
+                var ctrl = new PlayerControl(player, fifaCode); // nova instanca kontrole
 
                 if (favoriteIds.Contains(ctrl.PlayerId))
                 {
@@ -220,6 +220,18 @@ namespace WorldCupWinForms
                 }
             }
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            var result = MessageBox.Show("Želite li stvarno zatvoriti aplikaciju?", "Zatvori", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+
+            base.OnFormClosing(e);
+        }
+
 
     }
 }
