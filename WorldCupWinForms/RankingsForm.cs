@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using WorldCupData.Enums;
@@ -20,9 +21,10 @@ namespace WorldCupWinForms
             InitializeComponent();
             _fifaCode = fifaCode;
             _tournament = tournament;
-            _provider = new JsonDataProvider(); // ili ApiDataProvider
+            _provider = new JsonDataProvider();
 
-            this.Load += RankingsForm_Load_1; // ⬅️ Ovo dodaj!
+            //this.Load += RankingsForm_Load_1;
+            printDocument1.PrintPage += printDocument1_PrintPage;
         }
 
         private async void RankingsForm_Load_1(object sender, EventArgs e)
@@ -35,7 +37,6 @@ namespace WorldCupWinForms
             FillScorers(teamMatches);
             FillCards(teamMatches);
             FillAttendance(teamMatches);
-            // Sljedeće: FillCards(teamMatches); FillAttendance(teamMatches);
         }
 
         private void FillScorers(List<Match> matches)
@@ -119,10 +120,96 @@ namespace WorldCupWinForms
                 lvAttendance.Items.Add(item);
             }
         }
-
         private void btnClose_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            float x = 50;
+            float y = 50;
+            float lineHeight = 20;
+
+            ExportView(lvScorers, e.Graphics, ref x, ref y, lineHeight, "Top Scorers");
+            ExportView(lvCards, e.Graphics, ref x, ref y, lineHeight, "Yellow Cards");
+            ExportView(lvAttendance, e.Graphics, ref x, ref y, lineHeight, "Attendance");
+
+            e.HasMorePages = false;
+        }
+
+        private void ExportView(ListView lv, Graphics g, ref float x, ref float y, float lineHeight, string title)
+        {
+            Font bold = new Font("Arial", 10, FontStyle.Bold);
+            Font normal = new Font("Arial", 10);
+
+            g.DrawString(title, bold, Brushes.Black, x, y);
+            y += lineHeight;
+
+            // Headers
+            for (int i = 0; i < lv.Columns.Count; i++)
+            {
+                g.DrawString(lv.Columns[i].Text, bold, Brushes.Black, x + i * 150, y);
+            }
+
+            y += lineHeight;
+
+            // Rows
+            foreach (ListViewItem item in lv.Items)
+            {
+                for (int i = 0; i < item.SubItems.Count; i++)
+                {
+                    g.DrawString(item.SubItems[i].Text, normal, Brushes.Black, x + i * 150, y);
+                }
+                y += lineHeight;
+            }
+
+            y += 30;
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = printDocument1;
+
+            printPreviewDialog1.Width = 1000;
+            printPreviewDialog1.Height = 800;
+            printPreviewDialog1.PrintPreviewControl.Zoom = 1.0;
+
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            ExportToPdf();
+        }
+
+        private void ExportToPdf()
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveFileDialog.Title = "Save PDF";
+                saveFileDialog.FileName = "Rankings.pdf";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument1.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                    printDocument1.PrinterSettings.PrintToFile = true;
+                    printDocument1.PrinterSettings.PrintFileName = saveFileDialog.FileName;
+
+                    try
+                    {
+                        printDocument1.Print();
+                        MessageBox.Show("Exported successfully to PDF!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error exporting PDF: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+
     }
 }

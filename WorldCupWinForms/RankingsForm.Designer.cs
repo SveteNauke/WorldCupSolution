@@ -30,9 +30,12 @@
         {
             ListViewItem listViewItem1 = new ListViewItem("");
             ListViewItem listViewItem2 = new ListViewItem("");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RankingsForm));
             lblTitle = new Label();
             tabRankings = new TabControl();
             tabScorers = new TabPage();
+            btnPdf = new Button();
+            btnPreview = new Button();
             lvScorers = new ListView();
             colScorerName = new ColumnHeader();
             colScorerGoals = new ColumnHeader();
@@ -47,6 +50,9 @@
             colAttendance = new ColumnHeader();
             colHomeTeam = new ColumnHeader();
             colAwayTeam = new ColumnHeader();
+            printDialog1 = new PrintDialog();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             tabRankings.SuspendLayout();
             tabScorers.SuspendLayout();
             tabCards.SuspendLayout();
@@ -78,6 +84,8 @@
             // 
             // tabScorers
             // 
+            tabScorers.Controls.Add(btnPdf);
+            tabScorers.Controls.Add(btnPreview);
             tabScorers.Controls.Add(lvScorers);
             tabScorers.Controls.Add(btnClose);
             tabScorers.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -89,14 +97,34 @@
             tabScorers.Text = "Scorers";
             tabScorers.UseVisualStyleBackColor = true;
             // 
+            // btnPdf
+            // 
+            btnPdf.Location = new Point(376, 347);
+            btnPdf.Name = "btnPdf";
+            btnPdf.Size = new Size(132, 42);
+            btnPdf.TabIndex = 4;
+            btnPdf.Text = "Export to PDF";
+            btnPdf.UseVisualStyleBackColor = true;
+            btnPdf.Click += btnPdf_Click;
+            // 
+            // btnPreview
+            // 
+            btnPreview.Location = new Point(514, 347);
+            btnPreview.Name = "btnPreview";
+            btnPreview.Size = new Size(132, 42);
+            btnPreview.TabIndex = 3;
+            btnPreview.Text = "Preview";
+            btnPreview.UseVisualStyleBackColor = true;
+            btnPreview.Click += btnPreview_Click;
+            // 
             // lvScorers
             // 
             lvScorers.Columns.AddRange(new ColumnHeader[] { colScorerName, colScorerGoals });
             lvScorers.FullRowSelect = true;
             lvScorers.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
-            lvScorers.Location = new Point(8, 16);
+            lvScorers.Location = new Point(8, 15);
             lvScorers.Name = "lvScorers";
-            lvScorers.Size = new Size(776, 312);
+            lvScorers.Size = new Size(770, 310);
             lvScorers.TabIndex = 1;
             lvScorers.UseCompatibleStateImageBehavior = false;
             lvScorers.View = View.Details;
@@ -104,13 +132,13 @@
             // colScorerName
             // 
             colScorerName.Text = "Player";
-            colScorerName.Width = 200;
+            colScorerName.Width = 400;
             // 
             // colScorerGoals
             // 
             colScorerGoals.Text = "Goals";
             colScorerGoals.TextAlign = HorizontalAlignment.Center;
-            colScorerGoals.Width = 80;
+            colScorerGoals.Width = 100;
             // 
             // btnClose
             // 
@@ -140,7 +168,7 @@
             lvCards.FullRowSelect = true;
             lvCards.Location = new Point(10, 19);
             lvCards.Name = "lvCards";
-            lvCards.Size = new Size(776, 329);
+            lvCards.Size = new Size(770, 310);
             lvCards.TabIndex = 0;
             lvCards.UseCompatibleStateImageBehavior = false;
             lvCards.View = View.Details;
@@ -172,7 +200,7 @@
             lvAttendance.FullRowSelect = true;
             lvAttendance.Location = new Point(8, 14);
             lvAttendance.Name = "lvAttendance";
-            lvAttendance.Size = new Size(776, 329);
+            lvAttendance.Size = new Size(770, 310);
             lvAttendance.TabIndex = 1;
             lvAttendance.UseCompatibleStateImageBehavior = false;
             lvAttendance.View = View.Details;
@@ -196,6 +224,21 @@
             // 
             colAwayTeam.Text = "Away Team";
             colAwayTeam.Width = 150;
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
             // 
             // RankingsForm
             // 
@@ -234,5 +277,10 @@
         private ColumnHeader colAttendance;
         private ColumnHeader colHomeTeam;
         private ColumnHeader colAwayTeam;
+        private PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private Button btnPreview;
+        private PrintPreviewDialog printPreviewDialog1;
+        private Button btnPdf;
     }
 }

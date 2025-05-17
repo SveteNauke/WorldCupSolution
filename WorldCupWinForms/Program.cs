@@ -1,9 +1,15 @@
 ﻿using WorldCupData.Config;
+using System.Globalization;
+using System.Threading;
+using WorldCupData.Enums;
+using System;
+
 
 namespace WorldCupWinForms
 {
     internal static class Program
     {
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -12,7 +18,6 @@ namespace WorldCupWinForms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-
 
             ApplicationConfiguration.Initialize();
 
@@ -26,6 +31,9 @@ namespace WorldCupWinForms
 
                 config = AppConfig.Load();
             }
+
+            var culture = config.Language == WorldCupData.Enums.Language.Croatian ? "hr" : "en";
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
 
 
             Application.Run(new MainForm(config));
