@@ -27,6 +27,7 @@ namespace WorldCupWinForms
                 config = AppConfig.Load();
             }
 
+
             Application.Run(new MainForm(config));
         }
     }

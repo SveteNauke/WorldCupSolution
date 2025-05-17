@@ -75,7 +75,7 @@ namespace WorldCupWinForms
 
         private void cmbFavoriteTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _ = HandleFavoriteTeamChangedAsync(); 
+            _ = HandleFavoriteTeamChangedAsync();
         }
 
         private async Task HandleFavoriteTeamChangedAsync()
@@ -232,6 +232,15 @@ namespace WorldCupWinForms
             base.OnFormClosing(e);
         }
 
+        private void btnShowRankings_Click(object sender, EventArgs e)
+        {
+            var selected = cmbFavoriteTeam.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(selected)) return;
 
+            var fifaCode = GetFifaCodeFromSelection(selected);
+
+            var rankingsForm = new RankingsForm(fifaCode, _config.Tournament);
+            rankingsForm.ShowDialog();
+        }
     }
 }

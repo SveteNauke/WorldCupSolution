@@ -28,7 +28,7 @@ namespace WorldCupData.Models
         public Weather Weather { get; set; }
 
         [JsonProperty("attendance")]
-        public string Attendance { get; set; }
+        public string? Attendance { get; set; }
 
         [JsonProperty("officials")]
         public List<string> Officials { get; set; }

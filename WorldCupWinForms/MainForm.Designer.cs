@@ -37,6 +37,7 @@
             pnlFavoritePlayers = new FlowLayoutPanel();
             lblAllPlayers = new Label();
             lblFavoritePlayers = new Label();
+            btnShowRankings = new Button();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -118,11 +119,22 @@
             lblFavoritePlayers.TabIndex = 5;
             lblFavoritePlayers.Text = "Favorite Players";
             // 
+            // btnShowRankings
+            // 
+            btnShowRankings.Location = new Point(536, 53);
+            btnShowRankings.Name = "btnShowRankings";
+            btnShowRankings.Size = new Size(167, 25);
+            btnShowRankings.TabIndex = 6;
+            btnShowRankings.Text = "Show Rankings";
+            btnShowRankings.UseVisualStyleBackColor = true;
+            btnShowRankings.Click += btnShowRankings_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 554);
+            Controls.Add(btnShowRankings);
             Controls.Add(lblFavoritePlayers);
             Controls.Add(lblAllPlayers);
             Controls.Add(pnlFavoritePlayers);
@@ -149,5 +161,6 @@
         private FlowLayoutPanel pnlFavoritePlayers;
         private Label lblAllPlayers;
         private Label lblFavoritePlayers;
+        private Button btnShowRankings;
     }
 }
