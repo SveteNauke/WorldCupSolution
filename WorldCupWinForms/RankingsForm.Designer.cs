@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem("");
-            ListViewItem listViewItem2 = new ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RankingsForm));
             lblTitle = new Label();
             tabRankings = new TabControl();
@@ -61,169 +59,122 @@
             // 
             // lblTitle
             // 
-            lblTitle.AutoSize = true;
-            lblTitle.Dock = DockStyle.Top;
-            lblTitle.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.Location = new Point(0, 0);
+            resources.ApplyResources(lblTitle, "lblTitle");
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(85, 25);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "Rank list";
             // 
             // tabRankings
             // 
+            resources.ApplyResources(tabRankings, "tabRankings");
             tabRankings.Controls.Add(tabScorers);
             tabRankings.Controls.Add(tabCards);
             tabRankings.Controls.Add(tabAttendance);
-            tabRankings.Dock = DockStyle.Fill;
-            tabRankings.Location = new Point(0, 25);
             tabRankings.Name = "tabRankings";
             tabRankings.SelectedIndex = 0;
-            tabRankings.Size = new Size(800, 425);
-            tabRankings.TabIndex = 1;
             // 
             // tabScorers
             // 
+            resources.ApplyResources(tabScorers, "tabScorers");
             tabScorers.Controls.Add(btnPdf);
             tabScorers.Controls.Add(btnPreview);
             tabScorers.Controls.Add(lvScorers);
             tabScorers.Controls.Add(btnClose);
-            tabScorers.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tabScorers.Location = new Point(4, 24);
             tabScorers.Name = "tabScorers";
-            tabScorers.Padding = new Padding(3);
-            tabScorers.Size = new Size(792, 397);
-            tabScorers.TabIndex = 0;
-            tabScorers.Text = "Scorers";
             tabScorers.UseVisualStyleBackColor = true;
             // 
             // btnPdf
             // 
-            btnPdf.Location = new Point(376, 347);
+            resources.ApplyResources(btnPdf, "btnPdf");
             btnPdf.Name = "btnPdf";
-            btnPdf.Size = new Size(132, 42);
-            btnPdf.TabIndex = 4;
-            btnPdf.Text = "Export to PDF";
             btnPdf.UseVisualStyleBackColor = true;
             btnPdf.Click += btnPdf_Click;
             // 
             // btnPreview
             // 
-            btnPreview.Location = new Point(514, 347);
+            resources.ApplyResources(btnPreview, "btnPreview");
             btnPreview.Name = "btnPreview";
-            btnPreview.Size = new Size(132, 42);
-            btnPreview.TabIndex = 3;
-            btnPreview.Text = "Preview";
             btnPreview.UseVisualStyleBackColor = true;
             btnPreview.Click += btnPreview_Click;
             // 
             // lvScorers
             // 
+            resources.ApplyResources(lvScorers, "lvScorers");
             lvScorers.Columns.AddRange(new ColumnHeader[] { colScorerName, colScorerGoals });
             lvScorers.FullRowSelect = true;
-            lvScorers.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
-            lvScorers.Location = new Point(8, 15);
+            lvScorers.Items.AddRange(new ListViewItem[] { (ListViewItem)resources.GetObject("lvScorers.Items"), (ListViewItem)resources.GetObject("lvScorers.Items1") });
             lvScorers.Name = "lvScorers";
-            lvScorers.Size = new Size(770, 310);
-            lvScorers.TabIndex = 1;
             lvScorers.UseCompatibleStateImageBehavior = false;
             lvScorers.View = View.Details;
             // 
             // colScorerName
             // 
-            colScorerName.Text = "Player";
-            colScorerName.Width = 400;
+            resources.ApplyResources(colScorerName, "colScorerName");
             // 
             // colScorerGoals
             // 
-            colScorerGoals.Text = "Goals";
-            colScorerGoals.TextAlign = HorizontalAlignment.Center;
-            colScorerGoals.Width = 100;
+            resources.ApplyResources(colScorerGoals, "colScorerGoals");
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(652, 347);
+            resources.ApplyResources(btnClose, "btnClose");
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(132, 42);
-            btnClose.TabIndex = 0;
-            btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click_1;
             // 
             // tabCards
             // 
+            resources.ApplyResources(tabCards, "tabCards");
             tabCards.Controls.Add(lvCards);
-            tabCards.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tabCards.Location = new Point(4, 24);
             tabCards.Name = "tabCards";
-            tabCards.Padding = new Padding(3);
-            tabCards.Size = new Size(792, 397);
-            tabCards.TabIndex = 1;
-            tabCards.Text = "Cards";
             tabCards.UseVisualStyleBackColor = true;
             // 
             // lvCards
             // 
+            resources.ApplyResources(lvCards, "lvCards");
             lvCards.Columns.AddRange(new ColumnHeader[] { colCardPlayerName, colCardCount });
             lvCards.FullRowSelect = true;
-            lvCards.Location = new Point(10, 19);
             lvCards.Name = "lvCards";
-            lvCards.Size = new Size(770, 310);
-            lvCards.TabIndex = 0;
             lvCards.UseCompatibleStateImageBehavior = false;
             lvCards.View = View.Details;
             // 
             // colCardPlayerName
             // 
-            colCardPlayerName.Text = "Player";
-            colCardPlayerName.Width = 200;
+            resources.ApplyResources(colCardPlayerName, "colCardPlayerName");
             // 
             // colCardCount
             // 
-            colCardCount.Text = "Yellow Cards";
-            colCardCount.Width = 100;
+            resources.ApplyResources(colCardCount, "colCardCount");
             // 
             // tabAttendance
             // 
+            resources.ApplyResources(tabAttendance, "tabAttendance");
             tabAttendance.Controls.Add(lvAttendance);
-            tabAttendance.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tabAttendance.Location = new Point(4, 24);
             tabAttendance.Name = "tabAttendance";
-            tabAttendance.Size = new Size(792, 397);
-            tabAttendance.TabIndex = 2;
-            tabAttendance.Text = "Attendance";
             tabAttendance.UseVisualStyleBackColor = true;
             // 
             // lvAttendance
             // 
+            resources.ApplyResources(lvAttendance, "lvAttendance");
             lvAttendance.Columns.AddRange(new ColumnHeader[] { colVenue, colAttendance, colHomeTeam, colAwayTeam });
             lvAttendance.FullRowSelect = true;
-            lvAttendance.Location = new Point(8, 14);
             lvAttendance.Name = "lvAttendance";
-            lvAttendance.Size = new Size(770, 310);
-            lvAttendance.TabIndex = 1;
             lvAttendance.UseCompatibleStateImageBehavior = false;
             lvAttendance.View = View.Details;
             // 
             // colVenue
             // 
-            colVenue.Text = "Venue";
-            colVenue.Width = 200;
+            resources.ApplyResources(colVenue, "colVenue");
             // 
             // colAttendance
             // 
-            colAttendance.Text = "Attendance";
-            colAttendance.Width = 100;
+            resources.ApplyResources(colAttendance, "colAttendance");
             // 
             // colHomeTeam
             // 
-            colHomeTeam.Text = "Home Team";
-            colHomeTeam.Width = 150;
+            resources.ApplyResources(colHomeTeam, "colHomeTeam");
             // 
             // colAwayTeam
             // 
-            colAwayTeam.Text = "Away Team";
-            colAwayTeam.Width = 150;
+            resources.ApplyResources(colAwayTeam, "colAwayTeam");
             // 
             // printDialog1
             // 
@@ -231,24 +182,17 @@
             // 
             // printPreviewDialog1
             // 
-            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
-            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
-            printPreviewDialog1.ClientSize = new Size(400, 300);
+            resources.ApplyResources(printPreviewDialog1, "printPreviewDialog1");
             printPreviewDialog1.Document = printDocument1;
-            printPreviewDialog1.Enabled = true;
-            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
             printPreviewDialog1.Name = "printPreviewDialog1";
-            printPreviewDialog1.Visible = false;
             // 
             // RankingsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
             Controls.Add(tabRankings);
             Controls.Add(lblTitle);
             Name = "RankingsForm";
-            Text = "RankingsForm";
             Load += RankingsForm_Load_1;
             tabRankings.ResumeLayout(false);
             tabScorers.ResumeLayout(false);

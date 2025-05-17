@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             lblTournament = new Label();
             cmbTournament = new ComboBox();
             lblLanguage = new Label();
@@ -38,65 +39,44 @@
             // 
             // lblTournament
             // 
-            lblTournament.AutoSize = true;
-            lblTournament.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTournament.Location = new Point(55, 66);
+            resources.ApplyResources(lblTournament, "lblTournament");
             lblTournament.Name = "lblTournament";
-            lblTournament.Size = new Size(148, 32);
-            lblTournament.TabIndex = 0;
-            lblTournament.Text = "Tournament:";
             // 
             // cmbTournament
             // 
+            resources.ApplyResources(cmbTournament, "cmbTournament");
             cmbTournament.FormattingEnabled = true;
-            cmbTournament.Location = new Point(209, 75);
             cmbTournament.Name = "cmbTournament";
-            cmbTournament.Size = new Size(121, 23);
-            cmbTournament.TabIndex = 1;
             // 
             // lblLanguage
             // 
-            lblLanguage.AutoSize = true;
-            lblLanguage.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblLanguage.Location = new Point(80, 136);
+            resources.ApplyResources(lblLanguage, "lblLanguage");
             lblLanguage.Name = "lblLanguage";
-            lblLanguage.Size = new Size(123, 32);
-            lblLanguage.TabIndex = 2;
-            lblLanguage.Text = "Language:";
             // 
             // cmbLanguage
             // 
+            resources.ApplyResources(cmbLanguage, "cmbLanguage");
             cmbLanguage.FormattingEnabled = true;
-            cmbLanguage.Location = new Point(209, 145);
             cmbLanguage.Name = "cmbLanguage";
-            cmbLanguage.Size = new Size(121, 23);
-            cmbLanguage.TabIndex = 3;
             // 
             // btnConfirm
             // 
-            btnConfirm.Location = new Point(80, 283);
+            resources.ApplyResources(btnConfirm, "btnConfirm");
             btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(250, 45);
-            btnConfirm.TabIndex = 4;
-            btnConfirm.Text = "Confirm";
             btnConfirm.UseVisualStyleBackColor = true;
             btnConfirm.Click += btnConfirm_Click_1;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(80, 344);
+            resources.ApplyResources(btnCancel, "btnCancel");
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(250, 45);
-            btnCancel.TabIndex = 5;
-            btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click_1;
             // 
             // SettingsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(434, 431);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(cmbLanguage);
@@ -104,7 +84,6 @@
             Controls.Add(cmbTournament);
             Controls.Add(lblTournament);
             Name = "SettingsForm";
-            Text = "SettingsForm";
             ResumeLayout(false);
             PerformLayout();
         }
