@@ -9,13 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="bin\**" />
     <Compile Remove="Data\Images\**" />
     <Compile Remove="obj\**" />
-    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="Data\Images\**" />
     <EmbeddedResource Remove="obj\**" />
-    <None Remove="bin\**" />
     <None Remove="Data\Images\**" />
     <None Remove="obj\**" />
   </ItemGroup>
@@ -32,6 +29,42 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="bin\Debug\net8.0-windows\config.txt" />
+    <Content Include="bin\Debug\net8.0-windows\Data\men\group_results.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\men\matches.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\men\results.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\men\teams.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\women\group_results.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\women\matches.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\women\results.json" />
+    <Content Include="bin\Debug\net8.0-windows\Data\women\teams.json" />
+    <Content Include="bin\Debug\net8.0-windows\favorite_team.txt" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-1.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-10.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-11.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-12.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-13.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-14.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-15.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-16.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-17.JPG" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-18.jpeg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-19.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-2.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-20.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-21.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-22.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-23.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-3.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-4.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-5.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-6.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-7.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-8.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\CRO-9.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Images\Default.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.deps.json" />
+    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.runtimeconfig.json" />
     <Content Include="Data\men\group_results.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -56,6 +89,15 @@
     <Content Include="Data\women\teams.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0-windows\Newtonsoft.Json.dll" />
+    <None Include="bin\Debug\net8.0-windows\WorldCupData.dll" />
+    <None Include="bin\Debug\net8.0-windows\WorldCupData.pdb" />
+    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.dll" />
+    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.exe" />
+    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.pdb" />
   </ItemGroup>
 
   <ItemGroup>
