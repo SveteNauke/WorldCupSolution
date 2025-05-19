@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using WorldCupData.Enums;
 using WorldCupData.Interfaces;
 using WorldCupData.Models;
 using WorldCupData.Services;
+using WorldCupWinForms.Localization;
 
 namespace WorldCupWinForms
 {
@@ -16,8 +19,10 @@ namespace WorldCupWinForms
         private readonly TournamentType _tournament;
         private readonly IDataProvider _provider;
 
-        public RankingsForm(string fifaCode, TournamentType tournament)
+        public RankingsForm(string fifaCode, TournamentType tournament, Language language)
         {
+
+            LocalizationHelper.SetCulture(language);
             InitializeComponent();
             _fifaCode = fifaCode;
             _tournament = tournament;
@@ -25,6 +30,8 @@ namespace WorldCupWinForms
 
             //this.Load += RankingsForm_Load_1;
             printDocument1.PrintPage += printDocument1_PrintPage;
+            LocalizationHelper.ApplyLocalization(this);
+
         }
 
         private async void RankingsForm_Load_1(object sender, EventArgs e)
@@ -209,6 +216,27 @@ namespace WorldCupWinForms
                 }
             }
         }
+
+        private void ApplyLocalization()
+        {
+            var manager = new ComponentResourceManager(typeof(RankingsForm));
+            var culture = Thread.CurrentThread.CurrentUICulture;
+
+            ApplyLocalizationToControls(this, manager, culture);
+        }
+
+        private void ApplyLocalizationToControls(Control container, ComponentResourceManager manager, CultureInfo culture)
+        {
+            manager.ApplyResources(container, container.Name, culture);
+
+            foreach (Control child in container.Controls)
+            {
+                ApplyLocalizationToControls(child, manager, culture);
+            }
+
+            manager.ApplyResources(this, "$this", culture);
+        }
+
 
 
     }

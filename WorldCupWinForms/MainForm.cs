@@ -1,7 +1,11 @@
-﻿using WorldCupData.Config;
+﻿using System.ComponentModel;
+using System.Globalization;
+using System.Threading.Tasks;
+using WorldCupData.Config;
 using WorldCupData.Enums;
 using WorldCupData.Interfaces;
 using WorldCupData.Services;
+using WorldCupWinForms.Localization;
 
 namespace WorldCupWinForms
 {
@@ -22,37 +26,45 @@ namespace WorldCupWinForms
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            IDataProvider provider = new JsonDataProvider(); // or ApiDataProvider
-            var matches = await provider.GetMatchesAsync(_config.Tournament);
-            MessageBox.Show($"Učitanih utakmica: {matches.Count}");
-
-            MessageBox.Show($"Jezik: {_config.Language}, Prvenstvo: {_config.Tournament}");
-
             pnlAllPlayers.AllowDrop = true;
             pnlFavoritePlayers.AllowDrop = true;
 
             pnlAllPlayers.DragEnter += Flp_DragEnter;
             pnlFavoritePlayers.DragEnter += Flp_DragEnter;
-
             pnlAllPlayers.DragDrop += FlpAllPlayers_DragDrop;
             pnlFavoritePlayers.DragDrop += FlpFavoritePlayers_DragDrop;
 
+            IDataProvider provider = new JsonDataProvider();
 
             await LoadTeamsAsync();
             await HandleFavoriteTeamChangedAsync();
             await LoadPlayersForFavoriteTeamAsync();
 
-
         }
 
-        private void btnOpenSettings_Click(object sender, EventArgs e)
+        private async void btnOpenSettings_Click(object sender, EventArgs e)
         {
-            var settingsForm = new SettingsForm();
+            var settingsForm = new SettingsForm(_config.Language);
+
+
             if (settingsForm.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Settings saved. Please restart the application to apply changes.",
-                                "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _config.Language = settingsForm.SelectedLanguage;
+                _config.Tournament = settingsForm.SelectedTournament;
+
+               ApplyLocalization();
+
+                await LoadTeamsAsync();
+                await HandleFavoriteTeamChangedAsync();
+                await LoadPlayersForFavoriteTeamAsync();
+
             }
+        }
+
+        private void ApplyLocalization()
+        {
+            LocalizationHelper.SetCulture(_config.Language);
+            LocalizationHelper.ApplyLocalization(this);
         }
 
         private async Task LoadTeamsAsync()
@@ -81,18 +93,14 @@ namespace WorldCupWinForms
         private async Task HandleFavoriteTeamChangedAsync()
         {
             var selected = cmbFavoriteTeam.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(selected))
-                return;
+            if (string.IsNullOrEmpty(selected)) return;
 
             File.WriteAllText(favoriteTeamFilePath, selected);
-
             string fifaCode = GetFifaCodeFromSelection(selected);
+
             IDataProvider provider = new JsonDataProvider();
-
-            var matches = await provider.GetMatchesAsync(_config.Tournament);
-
-            var match = matches.FirstOrDefault(m =>
-                m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode);
+            var match = (await provider.GetMatchesAsync(_config.Tournament))
+                        .FirstOrDefault(m => m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode);
 
             if (match == null)
             {
@@ -101,15 +109,13 @@ namespace WorldCupWinForms
             }
 
             var teamStats = match.HomeTeam.Code == fifaCode ? match.HomeTeamStatistics : match.AwayTeamStatistics;
-
             var allPlayers = teamStats.StartingEleven.Concat(teamStats.Substitutes).ToList();
-            pnlAllPlayers.Controls.Clear();
 
+            pnlAllPlayers.Controls.Clear();
             foreach (var player in allPlayers)
             {
                 var ctrl = new PlayerControl(player, fifaCode);
-                ctrl.SetFavorite(false); // jer dolazi iz allPlayers
-
+                ctrl.SetFavorite(false);
                 pnlAllPlayers.Controls.Add(ctrl);
             }
 
@@ -118,7 +124,6 @@ namespace WorldCupWinForms
 
         private string GetFifaCodeFromSelection(string selection)
         {
-            // Pretpostavka: format je "Brazil (BRA)"
             var start = selection.LastIndexOf('(') + 1;
             var length = selection.LastIndexOf(')') - start;
             return selection.Substring(start, length);
@@ -126,10 +131,7 @@ namespace WorldCupWinForms
 
         private void Flp_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(PlayerControl)))
-                e.Effect = DragDropEffects.Move;
-            else
-                e.Effect = DragDropEffects.None;
+            e.Effect = e.Data.GetDataPresent(typeof(PlayerControl)) ? DragDropEffects.Move : DragDropEffects.None;
         }
 
         private void FlpAllPlayers_DragDrop(object sender, DragEventArgs e)
@@ -177,12 +179,9 @@ namespace WorldCupWinForms
             var favoriteTeam = File.ReadAllText(favoriteTeamFilePath);
             var fifaCode = GetFifaCodeFromSelection(favoriteTeam);
 
-            IDataProvider provider = new JsonDataProvider(); // ili ApiDataProvider
-            var matches = await provider.GetMatchesAsync(_config.Tournament);
-
-            // Prva utakmica gdje se pojavljuje omiljeni tim
-            var match = matches.FirstOrDefault(m =>
-                m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode);
+            IDataProvider provider = new JsonDataProvider();
+            var match = (await provider.GetMatchesAsync(_config.Tournament))
+                        .FirstOrDefault(m => m.HomeTeam.Code == fifaCode || m.AwayTeam.Code == fifaCode);
 
             if (match == null)
             {
@@ -190,25 +189,19 @@ namespace WorldCupWinForms
                 return;
             }
 
-            var teamStats = match.HomeTeam.Code == fifaCode
-                ? match.HomeTeamStatistics
-                : match.AwayTeamStatistics;
-
+            var teamStats = match.HomeTeam.Code == fifaCode ? match.HomeTeamStatistics : match.AwayTeamStatistics;
             var players = teamStats.StartingEleven.Concat(teamStats.Substitutes).ToList();
 
-            // Učitaj omiljene iz .txt datoteke
             var favoriteIds = File.Exists(favoritePlayersFile)
                 ? File.ReadAllLines(favoritePlayersFile).ToHashSet()
                 : new HashSet<string>();
 
-            // Očisti panele
             pnlAllPlayers.Controls.Clear();
             pnlFavoritePlayers.Controls.Clear();
 
             foreach (var player in players)
             {
-                var ctrl = new PlayerControl(player, fifaCode); // nova instanca kontrole
-
+                var ctrl = new PlayerControl(player, fifaCode);
                 if (favoriteIds.Contains(ctrl.PlayerId))
                 {
                     ctrl.SetFavorite(true);
@@ -216,6 +209,7 @@ namespace WorldCupWinForms
                 }
                 else
                 {
+                    ctrl.SetFavorite(false);
                     pnlAllPlayers.Controls.Add(ctrl);
                 }
             }
@@ -239,7 +233,7 @@ namespace WorldCupWinForms
 
             var fifaCode = GetFifaCodeFromSelection(selected);
 
-            var rankingsForm = new RankingsForm(fifaCode, _config.Tournament);
+            var rankingsForm = new RankingsForm(fifaCode, _config.Tournament, _config.Language);
             rankingsForm.ShowDialog();
         }
     }

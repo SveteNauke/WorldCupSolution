@@ -25,7 +25,7 @@ namespace WorldCupWinForms
 
             if (config == null)
             {
-                var settingsForm = new SettingsForm();
+                var settingsForm = new SettingsForm(Language.English);
                 if (settingsForm.ShowDialog() != DialogResult.OK)
                     return;
 

@@ -101,10 +101,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PdfSharp-MigraDoc" Version="1.50.5147" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WorldCupData\WorldCupData.csproj" />
   </ItemGroup>
 

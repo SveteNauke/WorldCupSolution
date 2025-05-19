@@ -1,26 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
 using WorldCupData.Config;
 using WorldCupData.Enums;
+using WorldCupWinForms.Localization;
+
 
 namespace WorldCupWinForms
 {
     public partial class SettingsForm : Form
     {
 
-        public SettingsForm()
+        public Language SelectedLanguage { get; private set; }
+        public TournamentType SelectedTournament { get; private set; }
+
+        public SettingsForm(Language language)
         {
+            LocalizationHelper.SetCulture(language);
             InitializeComponent();
 
-            this.AcceptButton = btnConfirm;
-            this.CancelButton = btnCancel;
+            LocalizationHelper.ApplyLocalization(this);
+
+            AcceptButton = btnConfirm;
+            CancelButton = btnCancel;
 
             cmbLanguage.DataSource = Enum.GetValues(typeof(Language));
             cmbTournament.DataSource = Enum.GetValues(typeof(TournamentType));
@@ -34,22 +37,25 @@ namespace WorldCupWinForms
                 return;
             }
 
+            SelectedLanguage = (Language)cmbLanguage.SelectedItem;
+            SelectedTournament = (TournamentType)cmbTournament.SelectedItem;
+
             var config = new AppConfig
             {
-                Language = (Language)cmbLanguage.SelectedItem,
-                Tournament = (TournamentType)cmbTournament.SelectedItem
+                Language = SelectedLanguage,
+                Tournament = SelectedTournament
             };
 
             config.Save();
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }
