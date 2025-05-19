@@ -117,203 +117,197 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;btnOpenSettings.Name" xml:space="preserve">
-    <value>btnOpenSettings</value>
-  </data>
-  <data name="&gt;&gt;lblAllPlayers.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmbFavoriteTeam.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnShowRankings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 25</value>
+  <data name="&gt;&gt;lblFavoriteTeam.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblFavoritePlayers.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;pnlAllPlayers.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="btnOpenSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="&gt;&gt;lblFavoritePlayers.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblAllPlayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 113</value>
-  </data>
-  <data name="btnShowRankings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 53</value>
-  </data>
-  <data name="lblFavoritePlayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 113</value>
-  </data>
-  <data name="btnShowRankings.Text" xml:space="preserve">
-    <value>Show Rankings</value>
-  </data>
-  <data name="&gt;&gt;btnOpenSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblFavoritePlayers.Text" xml:space="preserve">
-    <value>Favorite Players</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblFavoritePlayers.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="pnlFavoritePlayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 137</value>
-  </data>
-  <data name="cmbFavoriteTeam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 23</value>
-  </data>
-  <data name="pnlAllPlayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 377</value>
-  </data>
-  <data name="&gt;&gt;cmbFavoriteTeam.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblAllPlayers.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
   <data name="lblAllPlayers.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblFavoriteTeam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 48</value>
-  </data>
-  <data name="lblAllPlayers.Text" xml:space="preserve">
-    <value>All players</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>MainForm</value>
-  </data>
-  <data name="&gt;&gt;lblFavoritePlayers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlFavoritePlayers.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblFavoriteTeam.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="&gt;&gt;pnlFavoritePlayers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="cmbFavoriteTeam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 55</value>
-  </data>
-  <data name="lblFavoriteTeam.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;pnlFavoritePlayers.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblFavoriteTeam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnOpenSettings.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="&gt;&gt;lblAllPlayers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblFavoriteTeam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 30</value>
+  <data name="&gt;&gt;cmbFavoriteTeam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pnlAllPlayers.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lblAllPlayers.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="lblFavoriteTeam.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;lblFavoritePlayers.Name" xml:space="preserve">
-    <value>lblFavoritePlayers</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblFavoriteTeam.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 15.75pt</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Main Form</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="pnlAllPlayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 137</value>
-  </data>
-  <data name="btnOpenSettings.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;btnShowRankings.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmbFavoriteTeam.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="btnOpenSettings.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="lblFavoritePlayers.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblAllPlayers.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;btnOpenSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblFavoritePlayers.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnShowRankings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 25</value>
   </data>
-  <data name="pnlAllPlayers.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
-    <value>TopDown</value>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;btnShowRankings.Name" xml:space="preserve">
-    <value>btnShowRankings</value>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
   </data>
-  <data name="pnlAllPlayers.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="lblFavoriteTeam.Text" xml:space="preserve">
+    <value>Favorite team:</value>
   </data>
-  <data name="pnlAllPlayers.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
   </data>
-  <data name="&gt;&gt;pnlAllPlayers.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="&gt;&gt;lblFavoriteTeam.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnShowRankings.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lblAllPlayers.Text" xml:space="preserve">
+    <value>All players</value>
   </data>
   <data name="&gt;&gt;btnShowRankings.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlAllPlayers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblAllPlayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFavoritePlayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pnlAllPlayers.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="&gt;&gt;pnlAllPlayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lblAllPlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="&gt;&gt;btnShowRankings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbFavoriteTeam.Name" xml:space="preserve">
+    <value>cmbFavoriteTeam</value>
+  </data>
+  <data name="pnlFavoritePlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 377</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;btnShowRankings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pnlAllPlayers.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblFavoriteTeam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFavoriteTeam.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 25</value>
+  </data>
+  <data name="cmbFavoriteTeam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 55</value>
+  </data>
+  <data name="&gt;&gt;lblFavoritePlayers.Name" xml:space="preserve">
+    <value>lblFavoritePlayers</value>
+  </data>
+  <data name="lblFavoritePlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 21</value>
+  </data>
+  <data name="pnlFavoritePlayers.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblFavoriteTeam.Name" xml:space="preserve">
+    <value>lblFavoriteTeam</value>
+  </data>
+  <data name="&gt;&gt;pnlAllPlayers.Name" xml:space="preserve">
+    <value>pnlAllPlayers</value>
+  </data>
+  <data name="pnlFavoritePlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 137</value>
+  </data>
+  <data name="&gt;&gt;pnlFavoritePlayers.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlFavoritePlayers.Name" xml:space="preserve">
     <value>pnlFavoritePlayers</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 554</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Main Form</value>
   </data>
-  <data name="&gt;&gt;lblFavoriteTeam.Parent" xml:space="preserve">
+  <data name="lblAllPlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 113</value>
+  </data>
+  <data name="cmbFavoriteTeam.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pnlAllPlayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFavoritePlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 113</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmbFavoriteTeam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;pnlFavoritePlayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAllPlayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnOpenSettings.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnShowRankings.Text" xml:space="preserve">
+    <value>Show Rankings</value>
+  </data>
+  <data name="lblFavoriteTeam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 48</value>
+  </data>
+  <data name="&gt;&gt;pnlAllPlayers.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblFavoritePlayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFavoriteTeam.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="lblFavoritePlayers.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="pnlAllPlayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 137</value>
+  </data>
+  <data name="&gt;&gt;btnOpenSettings.Name" xml:space="preserve">
+    <value>btnOpenSettings</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFavoritePlayers.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblAllPlayers.Name" xml:space="preserve">
+    <value>lblAllPlayers</value>
+  </data>
+  <data name="btnShowRankings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 53</value>
+  </data>
+  <data name="lblFavoriteTeam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 30</value>
   </data>
   <data name="btnOpenSettings.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -644,61 +638,67 @@
         ERERERERERERERERERERERERERERERERERERERGRUD71qf8PicScJQ1NdoMAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pnlFavoritePlayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 377</value>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;lblFavoriteTeam.Name" xml:space="preserve">
-    <value>lblFavoriteTeam</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 25</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFavoriteTeam.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="pnlFavoritePlayers.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="pnlAllPlayers.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;cmbFavoriteTeam.Name" xml:space="preserve">
-    <value>cmbFavoriteTeam</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
   </data>
-  <data name="lblAllPlayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 21</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 554</value>
   </data>
-  <data name="&gt;&gt;lblAllPlayers.Name" xml:space="preserve">
-    <value>lblAllPlayers</value>
+  <data name="lblAllPlayers.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
-  <data name="lblFavoriteTeam.AutoSize" type="System.Boolean, mscorlib">
+  <data name="cmbFavoriteTeam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 23</value>
+  </data>
+  <data name="lblFavoritePlayers.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;pnlAllPlayers.Name" xml:space="preserve">
-    <value>pnlAllPlayers</value>
+  <data name="&gt;&gt;cmbFavoriteTeam.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;pnlFavoritePlayers.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnOpenSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;btnShowRankings.Name" xml:space="preserve">
+    <value>btnShowRankings</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFavoritePlayers.Text" xml:space="preserve">
+    <value>Favorite Players</value>
+  </data>
+  <data name="&gt;&gt;lblAllPlayers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblAllPlayers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="pnlAllPlayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 377</value>
   </data>
   <data name="btnShowRankings.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblFavoriteTeam.Text" xml:space="preserve">
-    <value>Favorite team:</value>
-  </data>
-  <data name="lblFavoritePlayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 21</value>
-  </data>
-  <data name="lblFavoriteTeam.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 15.75pt</value>
-  </data>
-  <data name="cmbFavoriteTeam.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>en</value>
   </metadata>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>
