@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorldCupData.Models;
@@ -52,25 +53,53 @@ namespace WorldCupWPF
             int leftPad = padding / 2;
 
             for (int i = 0; i < leftPad; i++)
-                grid.Children.Add(new Label()); // prazno za poravnanje
+                grid.Children.Add(new Label());
 
             foreach (var player in filtered)
             {
-                var label = new Label
+                var playerStack = new StackPanel
                 {
-                    Content = $"{player.ShirtNumber} {player.Name}" + (player.Captain ? " ★" : ""),
-                    Foreground = Brushes.White,
-                    Background = Brushes.Transparent,
-                    FontSize = 14,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalContentAlignment = VerticalAlignment.Center
+                    Orientation = Orientation.Vertical,
+                    HorizontalAlignment = HorizontalAlignment.Center
                 };
-                grid.Children.Add(label);
+
+                var image = new Image
+                {
+                    Width = 40,
+                    Height = 40,
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Resources/dres.png"))
+                };
+
+
+                var label = new TextBlock
+                {
+                    Text = $"{player.ShirtNumber} {player.Name}" + (player.Captain ? " ★" : ""),
+                    Foreground = Brushes.White,
+                    FontSize = 12,
+                    TextAlignment = TextAlignment.Center,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 90,
+
+                    Effect = new DropShadowEffect
+                    {
+                        Color = Colors.Black,
+                        Direction = 0,
+                        ShadowDepth = 1,
+                        Opacity = 1
+                    }
+
+                };
+
+                playerStack.Children.Add(image);
+                playerStack.Children.Add(label);
+
+                grid.Children.Add(playerStack);
             }
 
             while (grid.Children.Count < totalSlots)
                 grid.Children.Add(new Label());
         }
+
     }
 }
 
