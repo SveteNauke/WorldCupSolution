@@ -111,13 +111,81 @@ namespace WorldCupWPF
 
         private void BtnFavoriteInfo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Otvaranje informacija o omiljenoj reprezentaciji...");
+            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
+            var opp = cmbOpponent.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
+
+            var favCode = GetFifaCode(fav);
+            var oppCode = GetFifaCode(opp);
+
+            var match = _matches.FirstOrDefault(m =>
+                (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
+                (m.HomeTeam.Code == oppCode && m.AwayTeam.Code == favCode));
+
+            if (match == null) return;
+
+            var stats = match.HomeTeam.Code == favCode
+                ? match.HomeTeamStatistics
+                : match.AwayTeamStatistics;
+
+            if (stats != null)
+            {
+                var win = new TeamDetailsWindow(stats);
+                win.Owner = this;
+                win.ShowDialog();
+            }
         }
 
         private void BtnOpponentInfo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Otvaranje informacija o protivničkoj reprezentaciji...");
+            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
+            var opp = cmbOpponent.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
+
+            var favCode = GetFifaCode(fav);
+            var oppCode = GetFifaCode(opp);
+
+            var match = _matches.FirstOrDefault(m =>
+                (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
+                (m.HomeTeam.Code == oppCode && m.AwayTeam.Code == favCode));
+
+            if (match == null) return;
+
+            var stats = match.HomeTeam.Code == oppCode
+                ? match.HomeTeamStatistics
+                : match.AwayTeamStatistics;
+
+            if (stats != null)
+            {
+                var win = new TeamDetailsWindow(stats);
+                win.Owner = this;
+                win.ShowDialog();
+            }
         }
+
+        private void BtnShowStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
+            var opp = cmbOpponent.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
+
+            var favCode = GetFifaCode(fav);
+            var oppCode = GetFifaCode(opp);
+
+            var match = _matches.FirstOrDefault(m =>
+                (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
+                (m.HomeTeam.Code == oppCode && m.AwayTeam.Code == favCode));
+
+            if (match == null) return;
+
+            var homePlayers = match.HomeTeamStatistics?.StartingEleven ?? new List<Player>();
+            var awayPlayers = match.AwayTeamStatistics?.StartingEleven ?? new List<Player>();
+
+            var formWindow = new FieldFormationWindow(homePlayers, awayPlayers);
+            formWindow.Owner = this;
+            formWindow.ShowDialog();
+        }
+
 
         private async void BtnReopenSettings_Click(object sender, RoutedEventArgs e)
         {

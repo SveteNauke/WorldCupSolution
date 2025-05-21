@@ -1,0 +1,44 @@
+﻿<Window x:Class="WorldCupWPF.TeamDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorldCupWPF"
+        mc:Ignorable="d"
+        Title="TeamDetailsWindow" Height="450" Width="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+
+            <TextBlock Text="{Binding Country}" 
+                       FontSize="24" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Tactics:" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Tactics}" Margin="0,0,0,10"/>
+
+            <UniformGrid Columns="2" Margin="0,10,0,0">
+                <TextBlock Text="Possession:" />
+                <TextBlock Text="{Binding BallPossession}" />
+
+                <TextBlock Text="Pass Accuracy:" />
+                <TextBlock Text="{Binding PassAccuracy}" />
+
+                <TextBlock Text="Fouls Committed:" />
+                <TextBlock Text="{Binding FoulsCommitted}" />
+
+                <TextBlock Text="Yellow Cards:" />
+                <TextBlock Text="{Binding YellowCards}" />
+
+                <TextBlock Text="Red Cards:" />
+                <TextBlock Text="{Binding RedCards}" />
+
+                <TextBlock Text="Balls Recovered:" />
+                <TextBlock Text="{Binding BallsRecovered}" />
+
+                <TextBlock Text="Tackles:" />
+                <TextBlock Text="{Binding Tackles}" />
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

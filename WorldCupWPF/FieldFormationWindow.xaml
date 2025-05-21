@@ -1,0 +1,40 @@
+﻿<Window x:Class="WorldCupWPF.FieldFormationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Formation" Height="700" Width="1000"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Resources/field.png" Stretch="Fill"/>
+        </Grid.Background>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <!-- HOME -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <!-- SPACE -->
+                <RowDefinition Height="100"/>
+                <!-- AWAY -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- GK -->
+            <UniformGrid x:Name="RowGoalieHome" Grid.Row="0" Columns="1" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowDefHome" Grid.Row="1" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowMidHome" Grid.Row="2" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowFwdHome" Grid.Row="3" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+
+            <!-- AWAY -->
+            <UniformGrid x:Name="RowFwdAway" Grid.Row="5" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowMidAway" Grid.Row="6" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowDefAway" Grid.Row="7" Columns="5" HorizontalAlignment="Center" Margin="0,10"/>
+            <UniformGrid x:Name="RowGoalieAway" Grid.Row="8" Columns="1" HorizontalAlignment="Center" Margin="0,10"/>
+        </Grid>
+    </Grid>
+</Window>

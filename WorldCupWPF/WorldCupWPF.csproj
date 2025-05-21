@@ -9,8 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\field.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WorldCupData\WorldCupData.csproj" />
     <ProjectReference Include="..\WorldCupWinForms\WorldCupWinForms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\field.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
