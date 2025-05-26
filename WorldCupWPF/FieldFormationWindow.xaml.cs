@@ -22,82 +22,62 @@ namespace WorldCupWPF
     /// </summary>
     public partial class FieldFormationWindow : Window
     {
-        public FieldFormationWindow(List<Player> homePlayers, List<Player> awayPlayers)
+        public FieldFormationWindow(List<Player> homePlayers, List<Player> awayPlayers, string homeTeamName, string awayTeamName)
         {
             InitializeComponent();
+            MatchTitle.Text = $"{homeTeamName.ToUpper()} vs {awayTeamName.ToUpper()}";
             RenderFormation(homePlayers, awayPlayers);
         }
 
         private void RenderFormation(List<Player> homePlayers, List<Player> awayPlayers)
         {
-            DrawLine(RowGoalieHome, homePlayers, "Goalie");
-            DrawLine(RowDefHome, homePlayers, "Defender");
-            DrawLine(RowMidHome, homePlayers, "Midfield");
-            DrawLine(RowFwdHome, homePlayers, "Forward");
+            DrawLine(RowGoalieHome, homePlayers, "Goalie", 1);
+            DrawLine(RowDefHome, homePlayers, "Defender", 5);
+            DrawLine(RowMidHome, homePlayers, "Midfield", 5);
+            DrawLine(RowFwdHome, homePlayers, "Forward", 3);
 
-            DrawLine(RowGoalieAway, awayPlayers, "Goalie");
-            DrawLine(RowDefAway, awayPlayers, "Defender");
-            DrawLine(RowMidAway, awayPlayers, "Midfield");
-            DrawLine(RowFwdAway, awayPlayers, "Forward");
+            DrawLine(RowGoalieAway, awayPlayers, "Goalie", 1);
+            DrawLine(RowDefAway, awayPlayers, "Defender", 5);
+            DrawLine(RowMidAway, awayPlayers, "Midfield", 5);
+            DrawLine(RowFwdAway, awayPlayers, "Forward", 3);
         }
 
-        private void DrawLine(UniformGrid grid, List<Player> players, string position, int minSlots = 5)
+        private void DrawLine(StackPanel panel, List<Player> players, string position, int expectedCount)
         {
-            grid.Children.Clear();
+            panel.Children.Clear();
 
-            var filtered = players.Where(p => p.Position.Equals(position, StringComparison.OrdinalIgnoreCase)).ToList();
-            int totalSlots = Math.Max(minSlots, filtered.Count);
-            grid.Columns = totalSlots;
+            var matchingPlayers = players.Where(p => p.Position == position).ToList();
 
-            int padding = totalSlots - filtered.Count;
-            int leftPad = padding / 2;
-
-            for (int i = 0; i < leftPad; i++)
-                grid.Children.Add(new Label());
-
-            foreach (var player in filtered)
+            foreach (var player in matchingPlayers)
             {
                 var playerStack = new StackPanel
                 {
                     Orientation = Orientation.Vertical,
-                    HorizontalAlignment = HorizontalAlignment.Center
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Margin = new Thickness(10, 0, 10, 0)
                 };
 
-                var image = new Image
+                var shirtImage = new Image
                 {
-                    Width = 40,
-                    Height = 40,
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Resources/dres.png"))
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Resources/dres.png")),
+                    Width = 50,
+                    Height = 50
                 };
 
-
-                var label = new TextBlock
+                var nameText = new TextBlock
                 {
-                    Text = $"{player.ShirtNumber} {player.Name}" + (player.Captain ? " ★" : ""),
+                    Text = $"{player.ShirtNumber} {player.Name}",
                     Foreground = Brushes.White,
                     FontSize = 12,
                     TextAlignment = TextAlignment.Center,
                     TextWrapping = TextWrapping.Wrap,
-                    Width = 90,
-
-                    Effect = new DropShadowEffect
-                    {
-                        Color = Colors.Black,
-                        Direction = 0,
-                        ShadowDepth = 1,
-                        Opacity = 1
-                    }
-
                 };
 
-                playerStack.Children.Add(image);
-                playerStack.Children.Add(label);
+                playerStack.Children.Add(shirtImage);
+                playerStack.Children.Add(nameText);
+                panel.Children.Add(playerStack);
 
-                grid.Children.Add(playerStack);
             }
-
-            while (grid.Children.Count < totalSlots)
-                grid.Children.Add(new Label());
         }
 
     }

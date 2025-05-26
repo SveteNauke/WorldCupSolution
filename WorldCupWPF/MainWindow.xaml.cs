@@ -181,9 +181,12 @@ namespace WorldCupWPF
             var homePlayers = match.HomeTeamStatistics?.StartingEleven ?? new List<Player>();
             var awayPlayers = match.AwayTeamStatistics?.StartingEleven ?? new List<Player>();
 
-            var formWindow = new FieldFormationWindow(homePlayers, awayPlayers);
-            formWindow.Owner = this;
-            formWindow.ShowDialog();
+            string homeName = match.HomeTeamCountry;
+            string awayName = match.AwayTeamCountry;
+
+            var formationWindow = new FieldFormationWindow(homePlayers, awayPlayers, homeName, awayName);
+            formationWindow.ShowDialog();
+
         }
 
 
