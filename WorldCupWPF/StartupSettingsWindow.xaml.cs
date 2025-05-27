@@ -34,8 +34,8 @@ namespace WorldCupWPF
             cmbResolution.ItemsSource = new[]
             {
                 "800x600",
-                "1000x700",
-                "1920x1080",
+                "1024x768",
+                "1600x1900",
                 "Fullscreen"
             };
 

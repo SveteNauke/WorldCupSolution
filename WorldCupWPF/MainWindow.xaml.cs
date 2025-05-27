@@ -117,12 +117,8 @@ namespace WorldCupWPF
 
         private void BtnFavoriteInfo_Click(object sender, RoutedEventArgs e)
         {
-            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
-            var opp = cmbOpponent.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
-
-            var favCode = GetFifaCode(fav);
-            var oppCode = GetFifaCode(opp);
+            if (!ValidateSelections(out string favCode, out string oppCode))
+                return;
 
             var match = _matches.FirstOrDefault(m =>
                 (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
@@ -144,12 +140,8 @@ namespace WorldCupWPF
 
         private void BtnOpponentInfo_Click(object sender, RoutedEventArgs e)
         {
-            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
-            var opp = cmbOpponent.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
-
-            var favCode = GetFifaCode(fav);
-            var oppCode = GetFifaCode(opp);
+            if (!ValidateSelections(out string favCode, out string oppCode))
+                return;
 
             var match = _matches.FirstOrDefault(m =>
                 (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
@@ -168,6 +160,32 @@ namespace WorldCupWPF
                 win.ShowDialog();
             }
         }
+
+        private bool ValidateSelections(out string favCode, out string oppCode)
+        {
+            favCode = null;
+            oppCode = null;
+
+            var fav = cmbFavoriteTeam.SelectedItem?.ToString();
+            var opp = cmbOpponent.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(fav))
+            {
+                MessageBox.Show("Please choose a home team!", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(opp))
+            {
+                MessageBox.Show("Please choose an opponent!", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            favCode = GetFifaCode(fav);
+            oppCode = GetFifaCode(opp);
+            return true;
+        }
+
 
         private void BtnShowStatistics_Click(object sender, RoutedEventArgs e)
         {
@@ -201,12 +219,46 @@ namespace WorldCupWPF
             var settingsWindow = new StartupSettingsWindow();
             if (settingsWindow.ShowDialog() == true)
             {
-
                 _config = AppConfig.Load();
                 _isDataLoaded = false;
+
+                ApplyResolution();
+
+                cmbOpponent.ItemsSource = null;
+                cmbOpponent.Items.Clear();
+                cmbOpponent.SelectedIndex = -1;
+                txtResult.Text = "";
+
                 await LoadDataAsync();
             }
         }
+
+        private void ApplyResolution()
+        {
+            var resPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resolution.txt");
+            if (!File.Exists(resPath)) return;
+
+            var res = File.ReadAllText(resPath);
+            if (res.Equals("Fullscreen", StringComparison.OrdinalIgnoreCase))
+            {
+                WindowState = WindowState.Maximized;
+                WindowStyle = WindowStyle.None;
+            }
+            else if (res.Contains("x"))
+            {
+                var parts = res.Split('x');
+                if (parts.Length == 2 &&
+                    int.TryParse(parts[0], out int width) &&
+                    int.TryParse(parts[1], out int height))
+                {
+                    Width = width;
+                    Height = height;
+                    WindowState = WindowState.Normal;
+                    WindowStyle = WindowStyle.SingleBorderWindow;
+                }
+            }
+        }
+
 
         private void AssignTeamCodeToPlayers(TeamStatistics stats, string teamCode)
         {
@@ -226,6 +278,7 @@ namespace WorldCupWPF
             }
 
         }
+
 
     }
 }
