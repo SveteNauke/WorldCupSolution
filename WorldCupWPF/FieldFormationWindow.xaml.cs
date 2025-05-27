@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,6 +41,7 @@ namespace WorldCupWPF
             DrawLine(RowDefAway, awayPlayers, "Defender", 5);
             DrawLine(RowMidAway, awayPlayers, "Midfield", 5);
             DrawLine(RowFwdAway, awayPlayers, "Forward", 3);
+
         }
 
         private void DrawLine(StackPanel panel, List<Player> players, string position, int expectedCount)
@@ -54,8 +56,13 @@ namespace WorldCupWPF
                 {
                     Orientation = Orientation.Vertical,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    Margin = new Thickness(10, 0, 10, 0)
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Cursor = Cursors.Hand,
+                    DataContext = player 
                 };
+               playerStack.Style = (Style)FindResource("HoverGrowStyle");
+
+                playerStack.MouseLeftButtonDown += Player_Click;
 
                 var shirtImage = new Image
                 {
@@ -77,6 +84,16 @@ namespace WorldCupWPF
                 playerStack.Children.Add(nameText);
                 panel.Children.Add(playerStack);
 
+            }
+        }
+
+        private void Player_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement fe && fe.DataContext is Player player)
+            {
+                var win = new PlayerWindow(player);
+                win.Owner = this;
+                win.ShowDialog();
             }
         }
 

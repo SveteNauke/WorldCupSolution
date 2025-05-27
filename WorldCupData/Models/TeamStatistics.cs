@@ -10,7 +10,7 @@ namespace WorldCupData.Models
     public class TeamStatistics
     {
         [JsonProperty("country")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [JsonProperty("attempts_on_goal")]
         public int? AttemptsOnGoal { get; set; }
@@ -67,12 +67,12 @@ namespace WorldCupData.Models
         public int? FoulsCommitted { get; set; }
 
         [JsonProperty("tactics")]
-        public string Tactics { get; set; }
+        public string? Tactics { get; set; }
 
         [JsonProperty("starting_eleven")]
-        public List<Player> StartingEleven { get; set; }
+        public List<Player>? StartingEleven { get; set; }
 
         [JsonProperty("substitutes")]
-        public List<Player> Substitutes { get; set; }
+        public List<Player>? Substitutes { get; set; }
     }
 }

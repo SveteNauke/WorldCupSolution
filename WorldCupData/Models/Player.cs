@@ -19,6 +19,8 @@ namespace WorldCupData.Models
         public int? ShirtNumber { get; set; }
 
         [JsonProperty("position")]
-        public string Position { get; set; }
+        public string? Position { get; set; }
+
+        public string TeamCode { get; set; }
     }
 }

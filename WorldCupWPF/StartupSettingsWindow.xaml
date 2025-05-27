@@ -5,20 +5,120 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorldCupWPF"
         mc:Ignorable="d"
-        Title="Postavke aplikacije" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Postavke aplikacije"
+        Height="300" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Window.Resources>
+
+        <!-- ComboBox toggle template -->
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Border Background="#2A2A2A" BorderBrush="#555" BorderThickness="1">
+                <Grid>
+                    <Path VerticalAlignment="Center" Margin="0,0,6,0"
+                          Fill="White" Data="M 0 0 L 4 4 L 8 0 Z"
+                          HorizontalAlignment="Right"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <!-- ComboBox style -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Template="{StaticResource ComboBoxToggleButton}"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press"/>
+                            <ContentPresenter Margin="6,2,25,2"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   Placement="Bottom"
+                                   AllowsTransparency="True"
+                                   PopupAnimation="Slide">
+                                <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border Background="#2A2A2A" BorderBrush="#555" BorderThickness="1"/>
+                                    <ScrollViewer Margin="4,6,4,6">
+                                        <StackPanel IsItemsHost="True"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Button style -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3A3A3A"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#777"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1A1A1A"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#999"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#444"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#555"/>
+                                <Setter Property="Foreground" Value="#888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+
+    </Window.Resources>
+
     <StackPanel Margin="20" VerticalAlignment="Center">
-        <TextBlock Text="Odaberite jezik:" />
-        <ComboBox x:Name="cmbLanguage" Margin="0,5"/>
+        <TextBlock Text="Choose language:" FontSize="14"/>
+        <ComboBox x:Name="cmbLanguage" Margin="0,5" FontSize="14"/>
 
-        <TextBlock Text="Odaberite prvenstvo:" Margin="10,10,0,0" />
-        <ComboBox x:Name="cmbTournament" Margin="0,5"/>
+        <TextBlock Text="Choose type:" FontSize="14" Width="349"/>
+        <ComboBox x:Name="cmbTournament" Margin="0,5" FontSize="14"/>
 
-        <TextBlock Text="Odaberite veličinu prozora:" Margin="10,10,0,0" />
-        <ComboBox x:Name="cmbResolution" Margin="0,5"/>
+        <TextBlock Text="Resolution:" FontSize="14"/>
+        <ComboBox x:Name="cmbResolution" Margin="0,5" FontSize="14"/>
 
         <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Right">
-            <Button Content="Potvrdi" Click="BtnConfirm_Click" Width="80" Margin="0,0,10,0" />
-            <Button Content="Odustani" Click="BtnCancel_Click" Width="80" />
+            <Button Content="Confirm" Click="BtnConfirm_Click" Width="80" Margin="0,0,10,0"/>
+            <Button Content="Close" Click="BtnCancel_Click" Width="80"/>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -34,18 +34,15 @@ namespace WorldCupWPF
         {
             InitializeComponent();
             _config = config;
-            LoadDataAsync();
+           _ = LoadDataAsync();
         }
 
-        private async 
-        Task
-        LoadDataAsync()
+        private async Task LoadDataAsync()
         {
             var results = await _provider.GetTeamResultsAsync(_config.Tournament);
             var items = results.Select(r => $"{r.Country} ({r.FifaCode})").ToList();
             cmbFavoriteTeam.ItemsSource = items;
 
-            // Učitaj favorite iz file-a
             var favPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "favorite_team.txt");
             if (File.Exists(favPath))
             {
@@ -98,9 +95,18 @@ namespace WorldCupWPF
                 (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
                 (m.HomeTeam.Code == oppCode && m.AwayTeam.Code == favCode));
 
-            if (match == null) txtResult.Text = "Nema rezultata";
-            else txtResult.Text = $"{match.HomeTeam.Goals} : {match.AwayTeam.Goals}";
+            if (match == null)
+            {
+                txtResult.Text = "Nema rezultata";
+                return;
+            }
+
+            txtResult.Text = $"{match.HomeTeam.Goals} : {match.AwayTeam.Goals}";
+
+            AssignTeamCodeToPlayers(match.HomeTeamStatistics, match.HomeTeam.Code);
+            AssignTeamCodeToPlayers(match.AwayTeamStatistics, match.AwayTeam.Code);
         }
+
 
         private string GetFifaCode(string selection)
         {
@@ -195,19 +201,32 @@ namespace WorldCupWPF
             var settingsWindow = new StartupSettingsWindow();
             if (settingsWindow.ShowDialog() == true)
             {
-                // Učitaj ponovno konfiguraciju
+
                 _config = AppConfig.Load();
-
-                //// Primijeni lokalizaciju (ručno jer WPF ne koristi ApplyResources kao Forms)
-                //Title = _config.Language != Language.Croatian ? "Main Form" : "Glavna forma";
-                //((Label)this.FindName("lblFavorite"))!.Content = _config.Language == Language.Croatian ? "Omiljena reprezentacija:" : "Favorite team:";
-                //((Label)this.FindName("lblOpponent"))!.Content = _config.Language == Language.Croatian ? "Protivnik:" : "Opponent:";
-
-                // Ponovno učitaj podatke s novim prvenstvom
                 _isDataLoaded = false;
                 await LoadDataAsync();
             }
         }
+
+        private void AssignTeamCodeToPlayers(TeamStatistics stats, string teamCode)
+        {
+            if (stats == null)
+            {
+                return;
+            }
+
+            foreach (var player in stats.StartingEleven)
+            {
+                player.TeamCode = teamCode;
+            }
+
+            foreach (var player in stats.Substitutes)
+            {
+                player.TeamCode = teamCode;
+            }
+
+        }
+
     }
 }
 

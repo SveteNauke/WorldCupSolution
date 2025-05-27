@@ -33,8 +33,8 @@ namespace WorldCupWPF
             cmbTournament.ItemsSource = Enum.GetValues(typeof(TournamentType));
             cmbResolution.ItemsSource = new[]
             {
-                "1280x720",
-                "1600x900",
+                "800x600",
+                "1000x700",
                 "1920x1080",
                 "Fullscreen"
             };
