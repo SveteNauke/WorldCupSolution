@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WorldCupData.Config;
 using WorldCupData.Interfaces;
 using WorldCupData.Models;
-using WorldCupData.Enums;
 using WorldCupData.Services;
+using WorldCupWPF.ViewModel;
 
 namespace WorldCupWPF
 {
@@ -26,9 +17,10 @@ namespace WorldCupWPF
     public partial class MainWindow : Window
     {
         private AppConfig _config;
-        private readonly IDataProvider _provider = new JsonDataProvider();
-        private List<Match> _matches;
+        private  IDataProvider _provider = new ApiDataProvider();
+        private List<Match>? _matches;
         private bool _isDataLoaded = false;
+        private List<TeamResult> _teamResults;
 
         public MainWindow(AppConfig config)
         {
@@ -39,20 +31,46 @@ namespace WorldCupWPF
 
         private async Task LoadDataAsync()
         {
-            var results = await _provider.GetTeamResultsAsync(_config.Tournament);
-            var items = results.Select(r => $"{r.Country} ({r.FifaCode})").ToList();
-            cmbFavoriteTeam.ItemsSource = items;
-
-            var favPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "favorite_team.txt");
-            if (File.Exists(favPath))
+            try
             {
-                var saved = File.ReadAllText(favPath);
-                if (items.Contains(saved))
-                    cmbFavoriteTeam.SelectedItem = saved;
-            }
+                LoadingOverlay.Visibility = Visibility.Visible;
+                _isDataLoaded = false;
+                try
+                {
+                    _teamResults = await _provider.GetTeamResultsAsync(_config.Tournament);
+                }
+                catch
+                {
+                    _provider = new JsonDataProvider();
+                    _teamResults = await _provider.GetTeamResultsAsync(_config.Tournament);
+                }
 
-            _matches = await _provider.GetMatchesAsync(_config.Tournament);
-            _isDataLoaded = true;
+
+                var results = await _provider.GetTeamResultsAsync(_config.Tournament);
+                _teamResults = results;
+
+                var items = results.Select(r => $"{r.Country} ({r.FifaCode})").ToList();
+                cmbFavoriteTeam.ItemsSource = items;
+
+                var favPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "favorite_team.txt");
+                if (File.Exists(favPath))
+                {
+                    var saved = File.ReadAllText(favPath);
+                    if (items.Contains(saved))
+                        cmbFavoriteTeam.SelectedItem = saved;
+                }
+
+                _matches = await _provider.GetMatchesAsync(_config.Tournament);
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri dohvaćanju podataka: " + ex.Message, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                LoadingOverlay.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void cmbFavoriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,6 +93,7 @@ namespace WorldCupWPF
 
             ShowResult();
         }
+
 
         private void cmbOpponent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -130,9 +149,12 @@ namespace WorldCupWPF
                 ? match.HomeTeamStatistics
                 : match.AwayTeamStatistics;
 
-            if (stats != null)
+            var result = _teamResults.FirstOrDefault(t => t.FifaCode == favCode);
+
+            if (stats != null && result != null)
             {
-                var win = new TeamDetailsWindow(stats);
+                var viewModel = TeamDetailsViewModel.Create(stats, result);
+                var win = new TeamDetailsWindow(viewModel);
                 win.Owner = this;
                 win.ShowDialog();
             }
@@ -142,6 +164,7 @@ namespace WorldCupWPF
         {
             if (!ValidateSelections(out string favCode, out string oppCode))
                 return;
+
 
             var match = _matches.FirstOrDefault(m =>
                 (m.HomeTeam.Code == favCode && m.AwayTeam.Code == oppCode) ||
@@ -153,9 +176,13 @@ namespace WorldCupWPF
                 ? match.HomeTeamStatistics
                 : match.AwayTeamStatistics;
 
-            if (stats != null)
+
+            var result = _teamResults.FirstOrDefault(t => t.FifaCode == oppCode);
+
+            if (stats != null && result != null)
             {
-                var win = new TeamDetailsWindow(stats);
+                var viewModel = TeamDetailsViewModel.Create(stats, result);
+                var win = new TeamDetailsWindow(viewModel);
                 win.Owner = this;
                 win.ShowDialog();
             }
@@ -169,23 +196,15 @@ namespace WorldCupWPF
             var fav = cmbFavoriteTeam.SelectedItem?.ToString();
             var opp = cmbOpponent.SelectedItem?.ToString();
 
-            if (string.IsNullOrEmpty(fav))
+            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp))
             {
-                MessageBox.Show("Please choose a home team!", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please choose a team!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
-            if (string.IsNullOrEmpty(opp))
-            {
-                MessageBox.Show("Please choose an opponent!", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
             favCode = GetFifaCode(fav);
             oppCode = GetFifaCode(opp);
             return true;
         }
-
 
         private void BtnShowStatistics_Click(object sender, RoutedEventArgs e)
         {
@@ -223,6 +242,10 @@ namespace WorldCupWPF
                 _isDataLoaded = false;
 
                 ApplyResolution();
+
+                cmbFavoriteTeam.ItemsSource = null;
+                cmbFavoriteTeam.Items.Clear();
+                cmbFavoriteTeam.SelectedIndex = -1;
 
                 cmbOpponent.ItemsSource = null;
                 cmbOpponent.Items.Clear();
@@ -279,6 +302,20 @@ namespace WorldCupWPF
 
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to close the app?",
+                                         "Closing confirmation",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes)
+            {
+                e.Cancel = true;
+            }
+
+            base.OnClosing(e);
+        }
 
     }
 }

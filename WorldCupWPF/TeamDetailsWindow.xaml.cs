@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorldCupData.Models;
+using WorldCupWPF.ViewModel;
 
 namespace WorldCupWPF
 {
@@ -21,16 +22,16 @@ namespace WorldCupWPF
     /// </summary>
     public partial class TeamDetailsWindow : Window
     {
-        public TeamDetailsWindow(TeamStatistics stats)
+        public TeamDetailsWindow(TeamDetailsViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = stats ?? throw new ArgumentNullException(nameof(stats));
+            DataContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
-            BeginAnimation(OpacityProperty, fadeIn);
+            var storyboard = (Storyboard)this.Resources["FadeInStoryboard"];
+            storyboard.Begin(this);
         }
     }
 }

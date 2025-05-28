@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WorldCupWPF"
         mc:Ignorable="d"
         Title="Team Details"
-        Height="450"
+        Opacity="0"
+        Loaded="Window_Loaded"
+        Height="550"
         Width="600"
         Background="#1E1E1E"
         Foreground="White">
@@ -17,8 +19,11 @@
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-
-
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0" To="1"
+                         Duration="0:0:0.5" />
+        </Storyboard>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#2A2A2A"/>
@@ -64,12 +69,13 @@
         <StackPanel Margin="20">
             <TextBlock Text="{Binding Country}"
                        FontSize="24"
-                       FontWeight="Bold"
+                       FontWeight="SemiBold"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,20" />
 
             <TextBlock Text="Tactics:" FontWeight="SemiBold"/>
             <TextBlock Text="{Binding Tactics}" Margin="0,0,0,10"/>
+            
             <UniformGrid Columns="2" Margin="0,10,0,0">
                 <TextBlock Text="Possession:" Margin="0,0,0,10"/>
                 <TextBlock Text="{Binding BallPossession}" Margin="0,0,0,10"/>
@@ -91,6 +97,18 @@
 
                 <TextBlock Text="Tackles:" Margin="0,0,0,0"/>
                 <TextBlock Text="{Binding Tackles}" Margin="0,0,0,0"/>
+                
+                <TextBlock Text="FIFA Code:"/>
+                <TextBlock Text="{Binding FifaCode}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Games Played:"/>
+                <TextBlock Text="{Binding GamesPlayed}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Wins / Draws / Losses:"/>
+                <TextBlock Text="{Binding WinsDrawsLosses}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Goals For / Against / Difference:"/>
+                <TextBlock Text="{Binding GoalsSummary}" Margin="0,0,0,10"/>
             </UniformGrid>
 
         </StackPanel>

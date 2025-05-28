@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
     <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove="obj\**" />
   </ItemGroup>
 
@@ -23,21 +26,33 @@
     <None Remove="Data\women\matches.json" />
     <None Remove="Data\women\results.json" />
     <None Remove="Data\women\teams.json" />
+    <None Remove="Images\CRO-1.jpg" />
+    <None Remove="Images\CRO-10.jpg" />
+    <None Remove="Images\CRO-11.jpg" />
+    <None Remove="Images\CRO-12.jpg" />
+    <None Remove="Images\CRO-13.jpg" />
+    <None Remove="Images\CRO-14.jpg" />
+    <None Remove="Images\CRO-15.jpg" />
+    <None Remove="Images\CRO-16.jpg" />
+    <None Remove="Images\CRO-17.JPG" />
+    <None Remove="Images\CRO-18.jpeg" />
+    <None Remove="Images\CRO-19.jpg" />
+    <None Remove="Images\CRO-2.jpg" />
+    <None Remove="Images\CRO-20.jpg" />
+    <None Remove="Images\CRO-21.jpg" />
+    <None Remove="Images\CRO-22.jpg" />
+    <None Remove="Images\CRO-23.jpg" />
+    <None Remove="Images\CRO-3.jpg" />
+    <None Remove="Images\CRO-4.jpg" />
+    <None Remove="Images\CRO-5.jpg" />
+    <None Remove="Images\CRO-6.jpg" />
+    <None Remove="Images\CRO-7.jpg" />
+    <None Remove="Images\CRO-8.jpg" />
+    <None Remove="Images\CRO-9.jpg" />
+    <None Remove="Images\Default.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\net8.0-windows\config.txt" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\group_results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\matches.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\men\teams.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\group_results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\matches.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\results.json" />
-    <Content Include="bin\Debug\net8.0-windows\Data\women\teams.json" />
-    <Content Include="bin\Debug\net8.0-windows\favorite_team.txt" />
-    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.deps.json" />
-    <Content Include="bin\Debug\net8.0-windows\WorldCupWinForms.runtimeconfig.json" />
     <Content Include="Data\men\group_results.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -62,15 +77,78 @@
     <Content Include="Data\women\teams.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\net8.0-windows\Newtonsoft.Json.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupData.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupData.pdb" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.dll" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.exe" />
-    <None Include="bin\Debug\net8.0-windows\WorldCupWinForms.pdb" />
+    <Content Include="Images\CRO-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-17.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-18.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-21.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-22.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-23.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CRO-9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Default.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -90,10 +168,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="bin\Debug\net8.0-windows\Images\" />
   </ItemGroup>
 
 </Project>

@@ -46,24 +46,59 @@ namespace WorldCupWPF
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Jeste li sigurni da želite primijeniti nove postavke?",
+                                         "Potvrda promjene",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            // nastavak: spremanje postavki
             SelectedConfig = new AppConfig
             {
                 Language = (Language)cmbLanguage.SelectedItem,
                 Tournament = (TournamentType)cmbTournament.SelectedItem
             };
 
-            SelectedConfig.Save();
-            SelectedResolution = cmbResolution.SelectedItem.ToString();
-
-            File.WriteAllText("resolution.txt", SelectedResolution);
+            SelectedResolution = cmbResolution.SelectedItem?.ToString();
+            SaveSelections();
 
             DialogResult = true;
             Close();
+        }
+        private void SaveSelections()
+        {
+            // Spremi config u config.txt
+            SelectedConfig?.Save();
+
+            // Spremi rezoluciju u resolution.txt
+            var resPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resolution.txt");
+            if (!string.IsNullOrEmpty(SelectedResolution))
+            {
+                File.WriteAllText(resPath, SelectedResolution);
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                BtnConfirm_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                DialogResult = false;
+                Close();
+                e.Handled = true;
+            }
+        }
+
     }
 }

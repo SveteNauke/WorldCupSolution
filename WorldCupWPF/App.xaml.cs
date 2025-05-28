@@ -12,12 +12,14 @@ namespace WorldCupWPF;
 /// </summary>
 public partial class App : Application
 {
-    public static AppConfig Config { get; private set; }
-    public static string Resolution { get; private set; }
+    public static AppConfig? Config { get; private set; }
+    public static string? Resolution { get; private set; }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
 
         Config = AppConfig.Load();
         string resolutionFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resolution.txt");
