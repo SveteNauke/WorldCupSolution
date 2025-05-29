@@ -20,7 +20,7 @@ namespace WorldCupWPF
         private  IDataProvider _provider = new ApiDataProvider();
         private List<Match>? _matches;
         private bool _isDataLoaded = false;
-        private List<TeamResult> _teamResults;
+        private List<TeamResult>? _teamResults;
 
         public MainWindow(AppConfig config)
         {
@@ -65,7 +65,7 @@ namespace WorldCupWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Greška pri dohvaćanju podataka: " + ex.Message, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error when reading file " + ex.Message, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -210,7 +210,12 @@ namespace WorldCupWPF
         {
             var fav = cmbFavoriteTeam.SelectedItem?.ToString();
             var opp = cmbOpponent.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(fav) || string.IsNullOrEmpty(opp)) return;
+
+            if (string.IsNullOrEmpty(fav))
+            {
+                MessageBox.Show("Please choose a team first!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             var favCode = GetFifaCode(fav);
             var oppCode = GetFifaCode(opp);
@@ -304,11 +309,10 @@ namespace WorldCupWPF
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want to close the app?",
-                                         "Closing confirmation",
-                                         MessageBoxButton.YesNo,
-                                         MessageBoxImage.Question);
+            if (!this.IsLoaded || !this.IsVisible)
+                return;
 
+            var result = MessageBox.Show("Are you sure you want to close the app?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result != MessageBoxResult.Yes)
             {
                 e.Cancel = true;

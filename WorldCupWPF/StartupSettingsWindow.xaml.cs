@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WorldCupData.Config;
 using WorldCupData.Enums;
 
@@ -22,8 +11,8 @@ namespace WorldCupWPF
     /// </summary>
     public partial class StartupSettingsWindow : Window
     {
-        public AppConfig SelectedConfig { get; private set; }
-        public string SelectedResolution { get; private set; }
+        public AppConfig? SelectedConfig { get; private set; }
+        public string? SelectedResolution { get; private set; }
 
         public StartupSettingsWindow()
         {
@@ -46,15 +35,7 @@ namespace WorldCupWPF
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Jeste li sigurni da želite primijeniti nove postavke?",
-                                         "Potvrda promjene",
-                                         MessageBoxButton.YesNo,
-                                         MessageBoxImage.Question);
 
-            if (result != MessageBoxResult.Yes)
-                return;
-
-            // nastavak: spremanje postavki
             SelectedConfig = new AppConfig
             {
                 Language = (Language)cmbLanguage.SelectedItem,
@@ -67,12 +48,11 @@ namespace WorldCupWPF
             DialogResult = true;
             Close();
         }
+
         private void SaveSelections()
         {
-            // Spremi config u config.txt
             SelectedConfig?.Save();
 
-            // Spremi rezoluciju u resolution.txt
             var resPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resolution.txt");
             if (!string.IsNullOrEmpty(SelectedResolution))
             {

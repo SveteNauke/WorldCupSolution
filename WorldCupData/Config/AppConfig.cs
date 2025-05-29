@@ -10,7 +10,7 @@ namespace WorldCupData.Config
 {
     public class AppConfig
     {
-        private static readonly string ConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
+        public static readonly string ConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
 
         public Language Language { get; set; }
         public TournamentType Tournament { get; set; }

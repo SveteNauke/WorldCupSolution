@@ -17,49 +17,61 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
         base.OnStartup(e);
         System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
-
-        Config = AppConfig.Load();
+        AppConfig? config;
+        string? resolution;
         string resolutionFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resolution.txt");
 
-        if (Config == null || !File.Exists(resolutionFile))
+
+        if (!File.Exists(AppConfig.ConfigFilePath) || !File.Exists(resolutionFile))
         {
-            var settingsWindow = new StartupSettingsWindow();
-            if (settingsWindow.ShowDialog() != true)
+            var startupWindow = new StartupSettingsWindow();
+            bool? result = startupWindow.ShowDialog();
+
+            if (result != true || startupWindow.SelectedConfig == null)
             {
                 Shutdown();
                 return;
             }
 
-            Config = settingsWindow.SelectedConfig;
-            Resolution = settingsWindow.SelectedResolution;
+            config = startupWindow.SelectedConfig;
+            resolution = startupWindow.SelectedResolution;
         }
         else
         {
-            Resolution = File.ReadAllText(resolutionFile);
+            config = AppConfig.Load();
+            resolution = File.ReadAllText(resolutionFile);
         }
+
+        Config = config;
+        Resolution = resolution;
 
         var mainWindow = new MainWindow(Config);
 
-        if (Resolution == "Fullscreen")
+        if (resolution == "Fullscreen")
         {
             mainWindow.WindowStyle = WindowStyle.None;
             mainWindow.WindowState = WindowState.Maximized;
         }
         else
         {
-            var parts = Resolution.Split('x');
+            var parts = resolution.Split('x');
             if (parts.Length == 2 && double.TryParse(parts[0], out double width) && double.TryParse(parts[1], out double height))
             {
                 mainWindow.Width = width;
                 mainWindow.Height = height;
+                mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             }
         }
 
+        MainWindow = mainWindow;
         mainWindow.Show();
     }
+
 }
 
 
