@@ -319,6 +319,7 @@ namespace WorldCupWPF
             }
 
             base.OnClosing(e);
+
         }
 
     }

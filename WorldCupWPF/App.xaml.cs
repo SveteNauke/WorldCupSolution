@@ -70,6 +70,8 @@ public partial class App : Application
 
         MainWindow = mainWindow;
         mainWindow.Show();
+
+        Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose; 
     }
 
 }
